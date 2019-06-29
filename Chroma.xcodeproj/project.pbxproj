@@ -12,6 +12,8 @@
 		F264D60D22C82A7C00E6A66A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F264D60B22C82A7C00E6A66A /* Main.storyboard */; };
 		F264D60F22C82A7C00E6A66A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F264D60E22C82A7C00E6A66A /* Assets.xcassets */; };
 		F264D61222C82A7C00E6A66A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F264D61022C82A7C00E6A66A /* LaunchScreen.storyboard */; };
+		F264D61A22C82B6D00E6A66A /* Millunium-BOLD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F264D61922C82B6D00E6A66A /* Millunium-BOLD.ttf */; };
+		F264D61C22C82B7800E6A66A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F264D61B22C82B7800E6A66A /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		F264D60E22C82A7C00E6A66A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F264D61122C82A7C00E6A66A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F264D61322C82A7C00E6A66A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F264D61922C82B6D00E6A66A /* Millunium-BOLD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Millunium-BOLD.ttf"; sourceTree = "<group>"; };
+		F264D61B22C82B7800E6A66A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,9 +60,11 @@
 			children = (
 				F264D60722C82A7C00E6A66A /* AppDelegate.swift */,
 				F264D60922C82A7C00E6A66A /* ViewController.swift */,
+				F264D61B22C82B7800E6A66A /* SettingsViewController.swift */,
 				F264D60B22C82A7C00E6A66A /* Main.storyboard */,
-				F264D60E22C82A7C00E6A66A /* Assets.xcassets */,
 				F264D61022C82A7C00E6A66A /* LaunchScreen.storyboard */,
+				F264D60E22C82A7C00E6A66A /* Assets.xcassets */,
+				F264D61922C82B6D00E6A66A /* Millunium-BOLD.ttf */,
 				F264D61322C82A7C00E6A66A /* Info.plist */,
 			);
 			path = Chroma;
@@ -122,6 +128,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F264D61A22C82B6D00E6A66A /* Millunium-BOLD.ttf in Resources */,
 				F264D61222C82A7C00E6A66A /* LaunchScreen.storyboard in Resources */,
 				F264D60F22C82A7C00E6A66A /* Assets.xcassets in Resources */,
 				F264D60D22C82A7C00E6A66A /* Main.storyboard in Resources */,
@@ -137,6 +144,7 @@
 			files = (
 				F264D60A22C82A7C00E6A66A /* ViewController.swift in Sources */,
 				F264D60822C82A7C00E6A66A /* AppDelegate.swift in Sources */,
+				F264D61C22C82B7800E6A66A /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

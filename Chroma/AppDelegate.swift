@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  Chroma
+//  DoodlePoints
 //
-//  Created by Erik Salas on 6/29/19.
+//  Created by Erik Salas on 5/23/19.
 //  Copyright © 2019 Erik Salas. All rights reserved.
 //
 
