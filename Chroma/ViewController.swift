@@ -13,11 +13,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var tempImage: UIImageView!
     @IBOutlet weak var hud: UIButton!
     @IBOutlet weak var reset: UIButton!
-    @IBOutlet weak var utilitiesBackground: UIView!
-    @IBOutlet weak var utilities: UIStackView!
+    @IBOutlet weak var save: UIButton!
+    @IBOutlet weak var menuBackground: UIView!
+    @IBOutlet weak var point: UIButton!
+    @IBOutlet weak var size: UIButton!
+    
+    @IBOutlet weak var pointSliderBackground: UIView!
+    @IBOutlet weak var suppliesMenuBackground: UIView!
+    @IBOutlet weak var menuStack: UIStackView!
+    @IBOutlet weak var pointSliderStack: UIStackView!
+    @IBOutlet weak var suppliesMenuStack: UIStackView!
+    
+    
     @IBOutlet weak var pointImageBackground: UIImageView!
     @IBOutlet weak var pointImage: UIImageView!
-    @IBOutlet weak var save: UIButton!
+
     @IBOutlet weak var pointSlider: UISlider!
     @IBOutlet weak var pointCount: UILabel!
     @IBOutlet weak var blackWhite: UIButton!
@@ -30,12 +40,21 @@ class ViewController: UIViewController {
     var pointWidth: CGFloat = 17.0
     var opacity: CGFloat = 1.0
     var imageOpacity: CGFloat = 1.0
-    var hideState = false
+    var hideAll = false
+    var hideSlider = true
+    var hideSupplies = true
     var canvasColor = UIColor.white
     var newCanvas = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        pointSliderBackground.isHidden = true
+        pointSliderStack.isHidden = true
+        suppliesMenuBackground.isHidden = true
+        suppliesMenuStack.isHidden = true
+        pointImageBackground.isHidden = true
+        pointImage.isHidden = true
         updateCustomization()
     
     }
@@ -85,7 +104,7 @@ class ViewController: UIViewController {
         updateCustomization()
     }
     
-    @IBAction func pointSize(_ sender: Any) {
+    @IBAction func sizeSlider(_ sender: Any) {
         pointWidth = CGFloat(round(pointSlider.value))
         pointCount.text = String(format: "%.0f", pointSlider.value)
         updateCustomization()
@@ -100,6 +119,47 @@ class ViewController: UIViewController {
         }
         print("erasing?")
         updateCustomization()
+    }
+    
+    @IBAction func pointChoice(_ sender: UIButton) {
+        
+        if sender == point {
+            hideSupplies = !hideSupplies
+            if hideSupplies {
+                suppliesMenuBackground.isHidden = true
+                suppliesMenuStack.isHidden = true
+            } else {
+                suppliesMenuBackground.isHidden = false
+                suppliesMenuStack.isHidden = false
+                pointSliderBackground.isHidden = true
+                pointSliderStack.isHidden = true
+                pointImageBackground.isHidden = true
+                pointImage.isHidden = true
+                hideSlider = true
+            }
+        }
+        
+        if sender == size {
+            hideSlider = !hideSlider
+            if hideSlider {
+                pointSliderBackground.isHidden = true
+                pointSliderStack.isHidden = true
+                pointImageBackground.isHidden = true
+                pointImage.isHidden = true
+            } else {
+                pointSliderBackground.isHidden = false
+                pointSliderStack.isHidden = false
+                pointImageBackground.isHidden = false
+                pointImage.isHidden = false
+                suppliesMenuBackground.isHidden = true
+                suppliesMenuStack.isHidden = true
+                hideSupplies = true
+                pointSliderStack.superview?.bringSubviewToFront(pointSliderStack)
+            }
+        }
+    }
+    
+    @IBAction func undo(_ sender: Any) {
     }
     
     @IBAction func save(_ sender: Any) {
@@ -119,22 +179,30 @@ class ViewController: UIViewController {
     }
     
     @IBAction func hud(_ sender: Any) {
-        hideState = !hideState
-        if hideState {
+        hideAll = !hideAll
+        if hideAll {
             hud.setImage(UIImage(named: "menu.png"), for: .normal)
             reset.isHidden = true
-            utilitiesBackground.isHidden = true
-            utilities.isHidden = true
+            menuBackground.isHidden = true
+            menuStack.isHidden = true
+            pointSliderBackground.isHidden = true
+            pointSliderStack.isHidden = true
+            suppliesMenuBackground.isHidden = true
+            suppliesMenuStack.isHidden = true
             pointImageBackground.isHidden = true
             pointImage.isHidden = true
             save.isHidden = true
         } else {
             hud.setImage(UIImage(named: "close.png"), for: .normal)
             reset.isHidden = false
-            utilitiesBackground.isHidden = false
-            utilities.isHidden = false
-            pointImageBackground.isHidden = false
-            pointImage.isHidden = false
+            menuBackground.isHidden = false
+            menuStack.isHidden = false
+//            pointSliderBackground.isHidden = false
+//            pointSliderStack.isHidden = false
+//            suppliesMenuBackground.isHidden = false
+//            suppliesMenuStack.isHidden = false
+//            pointImageBackground.isHidden = false
+//            pointImage.isHidden = false
             save.isHidden = false
         }
     }
@@ -267,13 +335,17 @@ class ViewController: UIViewController {
                 mainImage.backgroundColor = canvasColor
                 blackWhite.setImage(UIImage(named: "black.png"), for: .normal)
                 pointCount.textColor = UIColor.black
-                utilitiesBackground.backgroundColor = UIColor.white.withAlphaComponent(0.40)
+                menuBackground.backgroundColor = UIColor.white.withAlphaComponent(0.40)
+                pointSliderBackground.backgroundColor = UIColor.white.withAlphaComponent(0.40)
+                suppliesMenuBackground.backgroundColor = UIColor.white.withAlphaComponent(0.40)
             } else {
                 mainImage.image = nil
                 mainImage.backgroundColor = canvasColor
                 blackWhite.setImage(UIImage(named: "white.png"), for: .normal)
                 pointCount.textColor = UIColor.white
-                utilitiesBackground.backgroundColor = UIColor.black.withAlphaComponent(0.40)
+                menuBackground.backgroundColor = UIColor.black.withAlphaComponent(0.40)
+                pointSliderBackground.backgroundColor = UIColor.black.withAlphaComponent(0.40)
+                suppliesMenuBackground.backgroundColor = UIColor.black.withAlphaComponent(0.40)
 
             }
             
@@ -283,8 +355,10 @@ class ViewController: UIViewController {
         hud.layer.cornerRadius = 15
         reset.layer.cornerRadius = 15
         save.layer.cornerRadius = 15
-        utilitiesBackground.layer.cornerRadius = 20
-        utilities.layer.cornerRadius = 4
+        menuBackground.layer.cornerRadius = 10
+        pointSliderBackground.layer.cornerRadius = 10
+        suppliesMenuBackground.layer.cornerRadius = 10
+///////////        utilities.layer.cornerRadius = 4
 //        whiteCanvas.layer.borderColor = UIColor.white.cgColor
 //        whiteCanvas.layer.borderWidth = 1
 //        blackCanvas.layer.cornerRadius = 2
