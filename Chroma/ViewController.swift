@@ -53,8 +53,6 @@ class ViewController: UIViewController {
         pointSliderStack.isHidden = true
         suppliesMenuBackground.isHidden = true
         suppliesMenuStack.isHidden = true
-        pointImageBackground.isHidden = true
-        pointImage.isHidden = true
         updateCustomization()
     
     }
@@ -133,8 +131,6 @@ class ViewController: UIViewController {
                 suppliesMenuStack.isHidden = false
                 pointSliderBackground.isHidden = true
                 pointSliderStack.isHidden = true
-                pointImageBackground.isHidden = true
-                pointImage.isHidden = true
                 hideSlider = true
             }
         }
@@ -144,13 +140,9 @@ class ViewController: UIViewController {
             if hideSlider {
                 pointSliderBackground.isHidden = true
                 pointSliderStack.isHidden = true
-                pointImageBackground.isHidden = true
-                pointImage.isHidden = true
             } else {
                 pointSliderBackground.isHidden = false
                 pointSliderStack.isHidden = false
-                pointImageBackground.isHidden = false
-                pointImage.isHidden = false
                 suppliesMenuBackground.isHidden = true
                 suppliesMenuStack.isHidden = true
                 hideSupplies = true
@@ -191,7 +183,9 @@ class ViewController: UIViewController {
             suppliesMenuStack.isHidden = true
             pointImageBackground.isHidden = true
             pointImage.isHidden = true
-            save.isHidden = true
+            hideSupplies = true
+            hideSlider = true
+//            save.isHidden = true
         } else {
             hud.setImage(UIImage(named: "close.png"), for: .normal)
             reset.isHidden = false
@@ -201,9 +195,9 @@ class ViewController: UIViewController {
 //            pointSliderStack.isHidden = false
 //            suppliesMenuBackground.isHidden = false
 //            suppliesMenuStack.isHidden = false
-//            pointImageBackground.isHidden = false
-//            pointImage.isHidden = false
-            save.isHidden = false
+            pointImageBackground.isHidden = false
+            pointImage.isHidden = false
+//            save.isHidden = false
         }
     }
     
