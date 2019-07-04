@@ -30,11 +30,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c95-Mc-h2S" userLabel="Hud">
-                                <rect key="frame" x="10" y="24" width="30" height="30"/>
+                                <rect key="frame" x="10" y="24" width="40" height="40"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.3964308647" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="9sp-Dy-qJs"/>
-                                    <constraint firstAttribute="height" constant="30" id="MDz-rY-Pni"/>
+                                    <constraint firstAttribute="width" constant="40" id="9sp-Dy-qJs"/>
+                                    <constraint firstAttribute="height" constant="40" id="MDz-rY-Pni"/>
                                 </constraints>
                                 <inset key="contentEdgeInsets" minX="4" minY="4" maxX="4" maxY="4"/>
                                 <state key="normal" image="close"/>
@@ -43,14 +43,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qUw-Sd-GBn" userLabel="Reset">
-                                <rect key="frame" x="280" y="24" width="30" height="30"/>
+                                <rect key="frame" x="270" y="24" width="40" height="40"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.3964308647260274" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="EFq-La-ZNi"/>
-                                    <constraint firstAttribute="width" constant="30" id="Z9V-pH-yPp"/>
+                                    <constraint firstAttribute="height" constant="40" id="EFq-La-ZNi"/>
+                                    <constraint firstAttribute="width" constant="40" id="Z9V-pH-yPp"/>
                                 </constraints>
                                 <inset key="contentEdgeInsets" minX="4" minY="4" maxX="4" maxY="4"/>
-                                <state key="normal" image="recycling"/>
+                                <state key="normal" image="recycle"/>
                                 <connections>
                                     <action selector="reset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HsE-Ou-bRV"/>
                                 </connections>
@@ -82,28 +82,27 @@
                                             <action selector="pointChoice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3hN-UT-bW1"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OXc-a1-HeW" userLabel="point size">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AzE-Xp-ZUY" userLabel="custom">
                                         <rect key="frame" x="51" y="0.0" width="47" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="9ko-qg-rHC"/>
+                                            <constraint firstAttribute="width" constant="47" id="vZ2-Ev-wQm"/>
+                                        </constraints>
+                                        <state key="normal" image="settings"/>
+                                        <connections>
+                                            <segue destination="oFJ-32-QYB" kind="presentation" id="YsH-LQ-BC3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OXc-a1-HeW" userLabel="point size">
+                                        <rect key="frame" x="102" y="0.0" width="47" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="47" id="P7Z-J6-dxN"/>
                                             <constraint firstAttribute="height" constant="45" id="f0x-0F-2V2"/>
                                         </constraints>
                                         <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" image="size"/>
+                                        <state key="normal" image="point"/>
                                         <connections>
                                             <action selector="pointChoice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WTH-Gn-Fpw"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57I-AN-VE0" userLabel="undo">
-                                        <rect key="frame" x="102" y="0.0" width="47" height="45"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="47" id="Gx4-7a-TSZ"/>
-                                            <constraint firstAttribute="height" constant="45" id="rVU-wm-ftA"/>
-                                        </constraints>
-                                        <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" image="undo"/>
-                                        <connections>
-                                            <action selector="undo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yIf-gY-upv"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vl0-UM-JnN" userLabel="save">
@@ -206,11 +205,10 @@
                                         <state key="normal" image="blue"/>
                                         <connections>
                                             <action selector="blue:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ea4-Vn-YHw"/>
-                                            <outletCollection property="gestureRecognizers" destination="9Fy-FI-zdH" appends="YES" id="DZC-GM-wAo"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dAY-cI-NXL" userLabel="green">
-                                        <rect key="frame" x="24" y="0.0" width="24" height="24"/>
+                                        <rect key="frame" x="27" y="0.0" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="G6o-77-8QS"/>
                                             <constraint firstAttribute="height" constant="24" id="aKf-ZQ-RKk"/>
@@ -221,7 +219,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nyc-gt-kXI" userLabel="yellow">
-                                        <rect key="frame" x="48" y="0.0" width="24" height="24"/>
+                                        <rect key="frame" x="54" y="0.0" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="AGP-Rl-UoR"/>
                                             <constraint firstAttribute="width" constant="24" id="jEu-PF-kAS"/>
@@ -232,7 +230,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5PT-TS-AgY" userLabel="pink">
-                                        <rect key="frame" x="72" y="0.0" width="24" height="24"/>
+                                        <rect key="frame" x="81" y="0.0" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="3JD-tG-9Rx"/>
                                             <constraint firstAttribute="width" constant="24" id="tRn-nS-bcg"/>
@@ -243,7 +241,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dR6-S9-TPP" userLabel="orange">
-                                        <rect key="frame" x="96" y="0.0" width="24" height="24"/>
+                                        <rect key="frame" x="108" y="0.0" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="ICY-CO-gcS"/>
                                             <constraint firstAttribute="width" constant="24" id="RgP-uK-Dlk"/>
@@ -254,7 +252,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ltM-ja-eCz" userLabel="brown">
-                                        <rect key="frame" x="120" y="0.0" width="24" height="24"/>
+                                        <rect key="frame" x="135" y="0.0" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="KQg-lT-bAp"/>
                                             <constraint firstAttribute="height" constant="24" id="iOD-b4-hef"/>
@@ -265,7 +263,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o8R-dd-8ie" userLabel="red">
-                                        <rect key="frame" x="144" y="0.0" width="24" height="24"/>
+                                        <rect key="frame" x="162" y="0.0" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="vGj-1Q-yI9"/>
                                             <constraint firstAttribute="height" constant="24" id="y82-T1-DEW"/>
@@ -276,7 +274,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCb-mc-b0A" userLabel="black white">
-                                        <rect key="frame" x="168" y="0.0" width="24" height="24"/>
+                                        <rect key="frame" x="189" y="0.0" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="5zi-pu-rpU"/>
                                             <constraint firstAttribute="height" constant="24" id="7yP-Nk-ALW"/>
@@ -284,17 +282,6 @@
                                         <state key="normal" image="black"/>
                                         <connections>
                                             <action selector="blackWhite:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UZa-et-rSU"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AzE-Xp-ZUY" userLabel="custom">
-                                        <rect key="frame" x="192" y="0.0" width="24" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="24" id="UXq-Ob-KO5"/>
-                                            <constraint firstAttribute="height" constant="24" id="wMx-wq-qXU"/>
-                                        </constraints>
-                                        <state key="normal" image="settings"/>
-                                        <connections>
-                                            <segue destination="oFJ-32-QYB" kind="presentation" id="YsH-LQ-BC3"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQR-kX-cWT" userLabel="erase">
@@ -634,13 +621,12 @@
         <image name="green" width="81" height="201"/>
         <image name="orange" width="81" height="201"/>
         <image name="pink" width="81" height="201"/>
+        <image name="point" width="100" height="100"/>
         <image name="previewBackground" width="75" height="75"/>
-        <image name="recycling" width="100" height="100"/>
+        <image name="recycle" width="120" height="120"/>
         <image name="red" width="81" height="201"/>
         <image name="save" width="100" height="100"/>
-        <image name="settings" width="96" height="96"/>
-        <image name="size" width="100" height="100"/>
-        <image name="undo" width="100" height="100"/>
+        <image name="settings" width="100" height="100"/>
         <image name="yellow" width="81" height="201"/>
     </resources>
 </document>

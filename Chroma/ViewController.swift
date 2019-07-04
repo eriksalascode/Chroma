@@ -151,9 +151,6 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func undo(_ sender: Any) {
-    }
-    
     @IBAction func save(_ sender: Any) {
         UIGraphicsBeginImageContext(mainImage.bounds.size)
         mainImage.image?.draw(in: CGRect(x: 0, y: 0, width: mainImage.frame.size.width, height: mainImage.frame.size.height))
