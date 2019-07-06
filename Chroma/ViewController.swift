@@ -325,7 +325,10 @@ class ViewController: UIViewController {
                 mainImage.image = nil
                 mainImage.backgroundColor = canvasColor
                 blackWhite.setImage(UIImage(named: "black.png"), for: .normal)
+//                (red, green, blue) = (0, 0, 0)
                 pointCount.textColor = UIColor.black
+                hud.backgroundColor = UIColor.white.withAlphaComponent(0.40)
+                reset.backgroundColor = UIColor.white.withAlphaComponent(0.40)
                 menuBackground.backgroundColor = UIColor.white.withAlphaComponent(0.40)
                 pointSliderBackground.backgroundColor = UIColor.white.withAlphaComponent(0.40)
                 suppliesMenuBackground.backgroundColor = UIColor.white.withAlphaComponent(0.40)
@@ -333,19 +336,26 @@ class ViewController: UIViewController {
                 mainImage.image = nil
                 mainImage.backgroundColor = canvasColor
                 blackWhite.setImage(UIImage(named: "white.png"), for: .normal)
+//                (red, green, blue) = (255, 255, 255)
                 pointCount.textColor = UIColor.white
+                hud.backgroundColor = UIColor.black.withAlphaComponent(0.40)
+                reset.backgroundColor = UIColor.black.withAlphaComponent(0.40)
                 menuBackground.backgroundColor = UIColor.black.withAlphaComponent(0.40)
                 pointSliderBackground.backgroundColor = UIColor.black.withAlphaComponent(0.40)
                 suppliesMenuBackground.backgroundColor = UIColor.black.withAlphaComponent(0.40)
+                
+//                if (red, green, blue) == (0, 0, 0) {
+//                    (red, green, blue) = (255, 255, 255)
+//                }
 
             }
             
             newCanvas = false
         }
         
-        hud.layer.cornerRadius = 15
-        reset.layer.cornerRadius = 15
-        save.layer.cornerRadius = 15
+        hud.layer.cornerRadius = 20
+        reset.layer.cornerRadius = 20
+//        save.layer.cornerRadius = 15
         menuBackground.layer.cornerRadius = 10
         pointSliderBackground.layer.cornerRadius = 10
         suppliesMenuBackground.layer.cornerRadius = 10

@@ -27,13 +27,11 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var greenLabel: UILabel!
     @IBOutlet weak var blueLabel: UILabel!
     
-    @IBOutlet weak var whiteCanvas: UIButton!
-    @IBOutlet weak var blackCanvas: UIButton!
+    @IBOutlet weak var colorControl: UISegmentedControl!
+    
     
     @IBOutlet weak var pointCount: UILabel!
     @IBOutlet weak var opacityCount: UILabel!
-    
-    @IBOutlet weak var close: UIButton!
     
     var pointWidth: CGFloat = 17.0
     var opacity: CGFloat = 1.0
@@ -71,10 +69,10 @@ class SettingsViewController: UIViewController {
         
     }
     
-    @IBAction func close(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-        self.delegate?.settingsViewControllerFinished(self)
-    }
+//    @IBAction func close(_ sender: Any) {
+//        self.dismiss(animated: true, completion: nil)
+//        self.delegate?.settingsViewControllerFinished(self)
+//    }
     
     @IBAction func pointSize(_ sender: Any) {
         pointWidth = CGFloat(round(pointSlider.value))
@@ -120,17 +118,47 @@ class SettingsViewController: UIViewController {
         self.updateSlidersAndLabels()
     }
     
-    @IBAction func whiteCanvasButton(_ sender: Any) {
-        canvasColor = UIColor.white
-        newCanvas = true
-        setWhiteCanvas()
+    @IBAction func changeCanvasColor(_ sender: Any) {
+        
+//        switch colorControl.selectedSegmentIndex {
+//        case 0:
+//            canvasColor = UIColor.white
+//            newCanvas = true
+//
+//            if (red, green, blue) == (255, 255, 255) {
+//                (red, green, blue) = (0, 0, 0)
+//                print("changing from white to black")
+//            }
+//        case 1:
+//            canvasColor = UIColor.black
+//            newCanvas = true
+//
+//            if (red, green, blue) == (0, 0, 0) {
+//                (red, green, blue) = (255, 255, 255)
+//                print("changing from black to white")
+//            }
+//        default:
+//            canvasColor = UIColor.white
+//            newCanvas = true
+//        }
+        
+        if colorControl.selectedSegmentIndex == 0 {
+            canvasColor = UIColor.white
+            newCanvas = true
+//            (red, green, blue) = (0, 0, 0)
+        } else if colorControl.selectedSegmentIndex == 1 {
+            canvasColor = UIColor.black
+            newCanvas = true
+//            (red, green, blue) = (255, 255, 255)
+        }
     }
     
-    @IBAction func blackCanvasButton(_ sender: Any) {
-        canvasColor = UIColor.black
-        newCanvas = true
-        setBlackCanvas()
+    @IBAction func done(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+        self.delegate?.settingsViewControllerFinished(self)
     }
+    
+    
     
     func updateCustomization() {
         UIGraphicsBeginImageContext(pointImage.frame.size)
@@ -143,25 +171,17 @@ class SettingsViewController: UIViewController {
         context.strokePath()
         pointImage.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-       
-        close.layer.cornerRadius = 15
-        whiteCanvas.layer.cornerRadius = 4
-        whiteCanvas.layer.borderColor = UIColor.white.cgColor
-        whiteCanvas.layer.borderWidth = 1
-        blackCanvas.layer.cornerRadius = 4
-        blackCanvas.layer.borderColor = UIColor.white.cgColor
-        blackCanvas.layer.borderWidth = 1
         
-        whiteCanvas.layer.shadowColor = UIColor.black.cgColor
-        whiteCanvas.layer.shadowOffset = CGSize(width: 1, height: 1)
-        whiteCanvas.layer.shadowOpacity = 1.0
-        whiteCanvas.layer.shadowRadius = 0
-        whiteCanvas.layer.masksToBounds = false
-        blackCanvas.layer.shadowColor = UIColor.black.cgColor
-        blackCanvas.layer.shadowOffset = CGSize(width: 1, height: 1)
-        blackCanvas.layer.shadowOpacity = 1.0
-        blackCanvas.layer.shadowRadius = 0
-        blackCanvas.layer.masksToBounds = false
+        if let font = UIFont.init(name: "Millunium-Bold", size: 12) {
+            colorControl.setTitleTextAttributes([NSAttributedString.Key.font : font], for: .normal)
+            print("new font set")
+        } else {
+            print("not a valid font")
+        }
+        
+//        [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 17)]
+//        segmentedControl.setTitleTextAttributes(font, for: .normal)
+//
     }
     
     func updateSlidersAndLabels() {
@@ -183,19 +203,6 @@ class SettingsViewController: UIViewController {
         blueLabel.text = String(format: "Blue: %.0f/255", blueSlider.value)
 
     }
-    
-    func setWhiteCanvas () {
-        whiteCanvas.setTitleColor(UIColor.black, for: .normal)
-        whiteCanvas.backgroundColor = UIColor.white
-        blackCanvas.layer.borderColor = UIColor.white.cgColor
-        blackCanvas.backgroundColor = UIColor.clear
-    }
-    
-    func setBlackCanvas() {
-        blackCanvas.backgroundColor = UIColor.black
-        blackCanvas.layer.borderColor = UIColor.white.cgColor
-        whiteCanvas.setTitleColor(UIColor.white, for: .normal)
-        whiteCanvas.backgroundColor = UIColor.clear
-    }
+
 }
 
