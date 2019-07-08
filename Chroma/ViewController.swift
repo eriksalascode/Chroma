@@ -30,7 +30,16 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var pointSlider: UISlider!
     @IBOutlet weak var pointCount: UILabel!
-    @IBOutlet weak var blackWhite: UIButton!
+    
+    @IBOutlet weak var bluePoint: UIButton!
+    @IBOutlet weak var greenPoint: UIButton!
+    @IBOutlet weak var yellowPoint: UIButton!
+    @IBOutlet weak var pinkPoint: UIButton!
+    @IBOutlet weak var orangePoint: UIButton!
+    @IBOutlet weak var brownPoint: UIButton!
+    @IBOutlet weak var redPoint: UIButton!
+    @IBOutlet weak var blackWhitePoint: UIButton!
+    @IBOutlet weak var erasePoint: UIButton!
     
     var swiped = false
     var lastPoint = CGPoint.zero
@@ -74,17 +83,17 @@ class ViewController: UIViewController {
     }
     
     @IBAction func pink(_ sender: Any) {
-        (red, green, blue) = (255,192,203)
+        (red, green, blue) = (255, 138, 216)
         updateCustomization()
     }
     
     @IBAction func orange(_ sender: Any) {
-        (red, green, blue) = (255, 140, 0)
+        (red, green, blue) = (255, 147, 0)
         updateCustomization()
     }
     
     @IBAction func brown(_ sender: Any) {
-        (red, green, blue) = (139, 69, 19)
+        (red, green, blue) = (170, 121, 66)
         updateCustomization()
     }
     
@@ -160,11 +169,82 @@ class ViewController: UIViewController {
         
         let activity = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         
+        if let popoverController = activity.popoverPresentationController {
+            popoverController.sourceRect = CGRect(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2, width: 0, height: 0)
+            popoverController.sourceView = self.view
+            popoverController.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+        }
+        
         present(activity, animated: true, completion: nil)
+
     }
     
     @IBAction func reset(_ sender: Any) {
-        mainImage.image = nil
+        
+        
+//        var textField = UITextField()
+//        let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
+//        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+//            print("cancel was called")
+//        }
+//        let addCategory = UIAlertAction(title: "Done", style: .default) { (action) in
+//            let newCategory = Category()
+//            newCategory.name = textField.text!
+//            newCategory.color = UIColor.randomFlat.hexValue()
+//            var maxNumber = 0
+//
+//            let categories = self.realm.objects(Category.self)
+//            for (index, _) in categories.enumerated() {
+//                if maxNumber < categories[index].order {
+//                    maxNumber = categories[index].order
+//                }
+//
+//                maxNumber += 1
+//                newCategory.order = maxNumber
+//            }
+//
+//            self.save(category: newCategory)
+//            print("new category was saved")
+//        }
+//
+//        addCategory.isEnabled = false
+//        alert.addAction(cancel)
+//        alert.addAction(addCategory)
+//        alert.addTextField { (alertTextField) in
+//            alertTextField.enablesReturnKeyAutomatically = true
+//            alertTextField.returnKeyType = .done
+//            alertTextField.placeholder = "Add new category"
+//            textField = alertTextField
+//
+//            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: alertTextField, queue: OperationQueue.main, using:
+//                {_ in
+//                    let textCount = alertTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
+//                    let textIsNotEmpty = textCount > 0
+//                    addCategory.isEnabled = textIsNotEmpty
+//            })
+//        }
+        
+        let alert = UIAlertController(title: "Recycle Masterpiece", message: "Do you want to recylce your masterpiece?", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            
+        }
+        
+        let recycle = UIAlertAction(title: "Recyle", style: .default) { _ in
+            self.mainImage.image = nil
+        }
+        
+        let button1 = UIAlertAction(title: "button1", style: .default, handler: nil)
+        let button2 = UIAlertAction(title: "button2", style: .default, handler: nil)
+
+        
+        
+        alert.addAction(cancel)
+        alert.addAction(recycle)
+        alert.addAction(button1)
+        alert.addAction(button2)
+        
+        present(alert, animated: true, completion: nil)
+        
     }
     
     @IBAction func hud(_ sender: Any) {
@@ -324,7 +404,8 @@ class ViewController: UIViewController {
             if canvasColor == UIColor.white {
                 mainImage.image = nil
                 mainImage.backgroundColor = canvasColor
-                blackWhite.setImage(UIImage(named: "black.png"), for: .normal)
+//                blackWhitePoint.setImage(UIImage(named: "black.png"), for: .normal)
+                blackWhitePoint.backgroundColor = UIColor.black
 //                (red, green, blue) = (0, 0, 0)
                 pointCount.textColor = UIColor.black
                 hud.backgroundColor = UIColor.white.withAlphaComponent(0.40)
@@ -335,7 +416,8 @@ class ViewController: UIViewController {
             } else {
                 mainImage.image = nil
                 mainImage.backgroundColor = canvasColor
-                blackWhite.setImage(UIImage(named: "white.png"), for: .normal)
+//                blackWhitePoint.setImage(UIImage(named: "white.png"), for: .normal)
+                blackWhitePoint.backgroundColor = UIColor.white
 //                (red, green, blue) = (255, 255, 255)
                 pointCount.textColor = UIColor.white
                 hud.backgroundColor = UIColor.black.withAlphaComponent(0.40)
@@ -353,12 +435,44 @@ class ViewController: UIViewController {
             newCanvas = false
         }
         
+//        let customBlue = UIColor.init(red: 71, green: 136, blue: 199, alpha: 1)
+        
         hud.layer.cornerRadius = 20
         reset.layer.cornerRadius = 20
 //        save.layer.cornerRadius = 15
         menuBackground.layer.cornerRadius = 10
         pointSliderBackground.layer.cornerRadius = 10
         suppliesMenuBackground.layer.cornerRadius = 10
+        
+        bluePoint.layer.cornerRadius = 10
+        bluePoint.layer.borderColor = UIColor.clear.cgColor
+        bluePoint.layer.borderWidth = 2
+        greenPoint.layer.cornerRadius = 10
+        greenPoint.layer.borderColor = UIColor.clear.cgColor
+        greenPoint.layer.borderWidth = 2
+        yellowPoint.layer.cornerRadius = 10
+        yellowPoint.layer.borderColor = UIColor.clear.cgColor
+        yellowPoint.layer.borderWidth = 2
+        pinkPoint.layer.cornerRadius = 10
+        pinkPoint.layer.borderColor = UIColor.clear.cgColor
+        pinkPoint.layer.borderWidth = 2
+        orangePoint.layer.cornerRadius = 10
+        orangePoint.layer.borderColor = UIColor.clear.cgColor
+        orangePoint.layer.borderWidth = 2
+        brownPoint.layer.cornerRadius = 10
+        brownPoint.layer.borderColor = UIColor.clear.cgColor
+        brownPoint.layer.borderWidth = 2
+        redPoint.layer.cornerRadius = 10
+        redPoint.layer.borderColor = UIColor.clear.cgColor
+        redPoint.layer.borderWidth = 2
+        blackWhitePoint.layer.cornerRadius = 10
+        blackWhitePoint.layer.borderColor = UIColor.clear.cgColor
+        blackWhitePoint.layer.borderWidth = 2
+        erasePoint.layer.cornerRadius = 10
+        erasePoint.layer.borderColor = UIColor.clear.cgColor
+        erasePoint.layer.borderWidth = 2
+        
+        
 ///////////        utilities.layer.cornerRadius = 4
 //        whiteCanvas.layer.borderColor = UIColor.white.cgColor
 //        whiteCanvas.layer.borderWidth = 1

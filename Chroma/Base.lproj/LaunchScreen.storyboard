@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wC0-TM-1SQ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="colorBackground" translatesAutoresizingMaskIntoConstraints="NO" id="wC0-TM-1SQ">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" red="0.71372549019607845" green="0.86274509803921573" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
@@ -49,5 +49,6 @@
     </scenes>
     <resources>
         <image name="chromaLogo" width="1036" height="286"/>
+        <image name="colorBackground" width="2000" height="2000"/>
     </resources>
 </document>

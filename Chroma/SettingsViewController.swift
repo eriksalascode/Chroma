@@ -142,15 +142,36 @@ class SettingsViewController: UIViewController {
 //            newCanvas = true
 //        }
         
-        if colorControl.selectedSegmentIndex == 0 {
-            canvasColor = UIColor.white
-            newCanvas = true
-//            (red, green, blue) = (0, 0, 0)
-        } else if colorControl.selectedSegmentIndex == 1 {
-            canvasColor = UIColor.black
-            newCanvas = true
-//            (red, green, blue) = (255, 255, 255)
+        let alert = UIAlertController(title: "New Canvas", message: "Starting a new canvas will recycle your current masterpiece. Do you want to continue?", preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            self.colorControl.isSelected = false
+            
         }
+        
+        let proceed = UIAlertAction(title: "Continue", style: .default) { _ in
+            if self.colorControl.selectedSegmentIndex == 0 {
+                self.canvasColor = UIColor.white
+                self.newCanvas = true
+                //            (red, green, blue) = (0, 0, 0)
+            } else if self.colorControl.selectedSegmentIndex == 1 {
+                self.canvasColor = UIColor.black
+                self.newCanvas = true
+                //            (red, green, blue) = (255, 255, 255)
+            }
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(proceed)
+        
+        present(alert, animated: true, completion: nil)
+        
+        if alert.actions.startIndex == 0 {
+            colorControl.isSelected = false
+        }
+        
+        
+
     }
     
     @IBAction func done(_ sender: Any) {
