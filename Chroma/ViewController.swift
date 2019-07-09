@@ -161,6 +161,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func save(_ sender: Any) {
+
         UIGraphicsBeginImageContext(mainImage.bounds.size)
         mainImage.image?.draw(in: CGRect(x: 0, y: 0, width: mainImage.frame.size.width, height: mainImage.frame.size.height))
         
@@ -224,24 +225,52 @@ class ViewController: UIViewController {
 //            })
 //        }
         
-        let alert = UIAlertController(title: "Recycle Masterpiece", message: "Do you want to recylce your masterpiece?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Recycle Masterpiece", message: "Do you want to recylce your masterpiece by starting a new canvas?", preferredStyle: .alert)
+        
         let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-            
         }
         
-        let recycle = UIAlertAction(title: "Recyle", style: .default) { _ in
+        let whiteCanvas = UIAlertAction(title: "Start new white canvas", style: .default) { _ in
             self.mainImage.image = nil
+            self.canvasColor = UIColor.white
+            self.mainImage.backgroundColor = UIColor.white
+            //                blackWhitePoint.setImage(UIImage(named: "black.png"), for: .normal)
+            self.blackWhitePoint.backgroundColor = UIColor.black
+            (self.red, self.green, self.blue) = (0, 0, 0)
+            self.pointCount.textColor = UIColor.black
+            self.hud.backgroundColor = UIColor.white.withAlphaComponent(0.40)
+            self.reset.backgroundColor = UIColor.white.withAlphaComponent(0.40)
+            self.menuBackground.backgroundColor = UIColor.white.withAlphaComponent(0.40)
+            self.pointSliderBackground.backgroundColor = UIColor.white.withAlphaComponent(0.40)
+            self.suppliesMenuBackground.backgroundColor = UIColor.white.withAlphaComponent(0.40)
+            
+            self.opacity = 1.0
+            self.updateCustomization()
         }
         
-        let button1 = UIAlertAction(title: "button1", style: .default, handler: nil)
-        let button2 = UIAlertAction(title: "button2", style: .default, handler: nil)
+        let blackCanvas = UIAlertAction(title: "Start new black canvas", style: .default) { _ in
+            self.mainImage.image = nil
+            self.canvasColor = UIColor.black
+            self.mainImage.backgroundColor = UIColor.black
+            //                blackWhitePoint.setImage(UIImage(named: "white.png"), for: .normal)
+            self.blackWhitePoint.backgroundColor = UIColor.white
+            (self.red, self.green, self.blue) = (255, 255, 255)
+            self.pointCount.textColor = UIColor.white
+            self.hud.backgroundColor = UIColor.black.withAlphaComponent(0.40)
+            self.reset.backgroundColor = UIColor.black.withAlphaComponent(0.40)
+            self.menuBackground.backgroundColor = UIColor.black.withAlphaComponent(0.40)
+            self.pointSliderBackground.backgroundColor = UIColor.black.withAlphaComponent(0.40)
+            self.suppliesMenuBackground.backgroundColor = UIColor.black.withAlphaComponent(0.40)
+            
+            self.opacity = 1.0
+            self.updateCustomization()
+        }
 
         
         
         alert.addAction(cancel)
-        alert.addAction(recycle)
-        alert.addAction(button1)
-        alert.addAction(button2)
+        alert.addAction(whiteCanvas)
+        alert.addAction(blackCanvas)
         
         present(alert, animated: true, completion: nil)
         
@@ -400,40 +429,40 @@ class ViewController: UIViewController {
 //        print("\(opacity) opacity viewcontroller")
 //        print("\(imageOpacity) imageOpacity viewcontroller")
         
-        if newCanvas {
-            if canvasColor == UIColor.white {
-                mainImage.image = nil
-                mainImage.backgroundColor = canvasColor
-//                blackWhitePoint.setImage(UIImage(named: "black.png"), for: .normal)
-                blackWhitePoint.backgroundColor = UIColor.black
-//                (red, green, blue) = (0, 0, 0)
-                pointCount.textColor = UIColor.black
-                hud.backgroundColor = UIColor.white.withAlphaComponent(0.40)
-                reset.backgroundColor = UIColor.white.withAlphaComponent(0.40)
-                menuBackground.backgroundColor = UIColor.white.withAlphaComponent(0.40)
-                pointSliderBackground.backgroundColor = UIColor.white.withAlphaComponent(0.40)
-                suppliesMenuBackground.backgroundColor = UIColor.white.withAlphaComponent(0.40)
-            } else {
-                mainImage.image = nil
-                mainImage.backgroundColor = canvasColor
-//                blackWhitePoint.setImage(UIImage(named: "white.png"), for: .normal)
-                blackWhitePoint.backgroundColor = UIColor.white
-//                (red, green, blue) = (255, 255, 255)
-                pointCount.textColor = UIColor.white
-                hud.backgroundColor = UIColor.black.withAlphaComponent(0.40)
-                reset.backgroundColor = UIColor.black.withAlphaComponent(0.40)
-                menuBackground.backgroundColor = UIColor.black.withAlphaComponent(0.40)
-                pointSliderBackground.backgroundColor = UIColor.black.withAlphaComponent(0.40)
-                suppliesMenuBackground.backgroundColor = UIColor.black.withAlphaComponent(0.40)
-                
-//                if (red, green, blue) == (0, 0, 0) {
-//                    (red, green, blue) = (255, 255, 255)
-//                }
-
-            }
-            
-            newCanvas = false
-        }
+//        if newCanvas {
+//            if canvasColor == UIColor.white {
+//                mainImage.image = nil
+//                mainImage.backgroundColor = canvasColor
+////                blackWhitePoint.setImage(UIImage(named: "black.png"), for: .normal)
+//                blackWhitePoint.backgroundColor = UIColor.black
+////                (red, green, blue) = (0, 0, 0)
+//                pointCount.textColor = UIColor.black
+//                hud.backgroundColor = UIColor.white.withAlphaComponent(0.40)
+//                reset.backgroundColor = UIColor.white.withAlphaComponent(0.40)
+//                menuBackground.backgroundColor = UIColor.white.withAlphaComponent(0.40)
+//                pointSliderBackground.backgroundColor = UIColor.white.withAlphaComponent(0.40)
+//                suppliesMenuBackground.backgroundColor = UIColor.white.withAlphaComponent(0.40)
+//            } else {
+//                mainImage.image = nil
+//                mainImage.backgroundColor = canvasColor
+////                blackWhitePoint.setImage(UIImage(named: "white.png"), for: .normal)
+//                blackWhitePoint.backgroundColor = UIColor.white
+////                (red, green, blue) = (255, 255, 255)
+//                pointCount.textColor = UIColor.white
+//                hud.backgroundColor = UIColor.black.withAlphaComponent(0.40)
+//                reset.backgroundColor = UIColor.black.withAlphaComponent(0.40)
+//                menuBackground.backgroundColor = UIColor.black.withAlphaComponent(0.40)
+//                pointSliderBackground.backgroundColor = UIColor.black.withAlphaComponent(0.40)
+//                suppliesMenuBackground.backgroundColor = UIColor.black.withAlphaComponent(0.40)
+//
+////                if (red, green, blue) == (0, 0, 0) {
+////                    (red, green, blue) = (255, 255, 255)
+////                }
+//
+//            }
+//
+//            newCanvas = false
+//        }
         
 //        let customBlue = UIColor.init(red: 71, green: 136, blue: 199, alpha: 1)
         

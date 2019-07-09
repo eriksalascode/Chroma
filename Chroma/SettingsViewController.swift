@@ -193,12 +193,12 @@ class SettingsViewController: UIViewController {
         pointImage.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        if let font = UIFont.init(name: "Millunium-Bold", size: 12) {
-            colorControl.setTitleTextAttributes([NSAttributedString.Key.font : font], for: .normal)
-            print("new font set")
-        } else {
-            print("not a valid font")
-        }
+//        if let font = UIFont.init(name: "Millunium-Bold", size: 12) {
+//            colorControl.setTitleTextAttributes([NSAttributedString.Key.font : font], for: .normal)
+//            print("new font set")
+//        } else {
+//            print("not a valid font")
+//        }
         
 //        [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 17)]
 //        segmentedControl.setTitleTextAttributes(font, for: .normal)
