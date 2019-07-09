@@ -260,7 +260,7 @@
                                         <rect key="frame" x="828" y="0.0" width="116" height="34"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <action selector="blackWhite:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UZa-et-rSU"/>
+                                            <action selector="black:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UZa-et-rSU"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -323,7 +323,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="blackWhitePoint" destination="LCb-mc-b0A" id="cWB-il-ABT"/>
+                        <outlet property="blackPoint" destination="LCb-mc-b0A" id="cWB-il-ABT"/>
                         <outlet property="bluePoint" destination="FTB-ey-AL3" id="1PV-XH-EVS"/>
                         <outlet property="brownPoint" destination="ltM-ja-eCz" id="HiJ-M8-xbA"/>
                         <outlet property="erasePoint" destination="YQR-kX-cWT" id="f2s-Io-Yar"/>

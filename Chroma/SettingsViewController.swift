@@ -27,9 +27,6 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var greenLabel: UILabel!
     @IBOutlet weak var blueLabel: UILabel!
     
-    @IBOutlet weak var colorControl: UISegmentedControl!
-    
-    
     @IBOutlet weak var pointCount: UILabel!
     @IBOutlet weak var opacityCount: UILabel!
     
@@ -40,8 +37,6 @@ class SettingsViewController: UIViewController {
     var red: CGFloat = 0.0
     var green: CGFloat = 0.0
     var blue: CGFloat = 0.0
-    var canvasColor = UIColor.white
-    var newCanvas = false
     
     var delegate: SettingsViewControllerDelegate?
     
@@ -118,68 +113,10 @@ class SettingsViewController: UIViewController {
         self.updateSlidersAndLabels()
     }
     
-    @IBAction func changeCanvasColor(_ sender: Any) {
-        
-//        switch colorControl.selectedSegmentIndex {
-//        case 0:
-//            canvasColor = UIColor.white
-//            newCanvas = true
-//
-//            if (red, green, blue) == (255, 255, 255) {
-//                (red, green, blue) = (0, 0, 0)
-//                print("changing from white to black")
-//            }
-//        case 1:
-//            canvasColor = UIColor.black
-//            newCanvas = true
-//
-//            if (red, green, blue) == (0, 0, 0) {
-//                (red, green, blue) = (255, 255, 255)
-//                print("changing from black to white")
-//            }
-//        default:
-//            canvasColor = UIColor.white
-//            newCanvas = true
-//        }
-        
-        let alert = UIAlertController(title: "New Canvas", message: "Starting a new canvas will recycle your current masterpiece. Do you want to continue?", preferredStyle: .alert)
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-            self.colorControl.isSelected = false
-            
-        }
-        
-        let proceed = UIAlertAction(title: "Continue", style: .default) { _ in
-            if self.colorControl.selectedSegmentIndex == 0 {
-                self.canvasColor = UIColor.white
-                self.newCanvas = true
-                //            (red, green, blue) = (0, 0, 0)
-            } else if self.colorControl.selectedSegmentIndex == 1 {
-                self.canvasColor = UIColor.black
-                self.newCanvas = true
-                //            (red, green, blue) = (255, 255, 255)
-            }
-        }
-        
-        alert.addAction(cancel)
-        alert.addAction(proceed)
-        
-        present(alert, animated: true, completion: nil)
-        
-        if alert.actions.startIndex == 0 {
-            colorControl.isSelected = false
-        }
-        
-        
-
-    }
-    
     @IBAction func done(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         self.delegate?.settingsViewControllerFinished(self)
     }
-    
-    
     
     func updateCustomization() {
         UIGraphicsBeginImageContext(pointImage.frame.size)
@@ -192,17 +129,6 @@ class SettingsViewController: UIViewController {
         context.strokePath()
         pointImage.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
-//        if let font = UIFont.init(name: "Millunium-Bold", size: 12) {
-//            colorControl.setTitleTextAttributes([NSAttributedString.Key.font : font], for: .normal)
-//            print("new font set")
-//        } else {
-//            print("not a valid font")
-//        }
-        
-//        [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 17)]
-//        segmentedControl.setTitleTextAttributes(font, for: .normal)
-//
     }
     
     func updateSlidersAndLabels() {
@@ -222,7 +148,6 @@ class SettingsViewController: UIViewController {
         redLabel.text = String(format: "Red: %.0f/255", redSlider.value)
         greenLabel.text = String(format: "Green: %.0f/255", greenSlider.value)
         blueLabel.text = String(format: "Blue: %.0f/255", blueSlider.value)
-
     }
 
 }
