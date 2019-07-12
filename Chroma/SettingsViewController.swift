@@ -42,16 +42,13 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
         self.updateCustomization()
         self.updateSlidersAndLabels()
-        
-
     }
     
     //call touch methods without any statements to prevent ability to draw from the settings viewcontroller
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
     }
@@ -64,16 +61,15 @@ class SettingsViewController: UIViewController {
         
     }
     
-//    @IBAction func close(_ sender: Any) {
-//        self.dismiss(animated: true, completion: nil)
-//        self.delegate?.settingsViewControllerFinished(self)
-//    }
+    //selecting point size
     
     @IBAction func pointSize(_ sender: Any) {
         pointWidth = CGFloat(round(pointSlider.value))
         pointCount.text = String(format: "%.0f", pointSlider.value)
         self.updateCustomization()
     }
+    
+    //selecting opacity
     
     @IBAction func opacityChange(_ sender: Any) {
         opacity = CGFloat(opacitySlider.value)
@@ -91,6 +87,8 @@ class SettingsViewController: UIViewController {
         print("\(imageOpacity) imageOpacity settings")
     }
     
+    //selecting red value
+    
     @IBAction func redColor(_ sender: Any) {
         red = CGFloat(redSlider.value / 255)
         redLabel.text = String(format: "Red: %.0f/255", redSlider.value)
@@ -98,12 +96,16 @@ class SettingsViewController: UIViewController {
         self.updateCustomization()
     }
     
+    //selecting green value
+    
     @IBAction func greenColor(_ sender: Any) {
         green = CGFloat(greenSlider.value / 255)
         greenLabel.text = String(format: "Green: %.0f/255", greenSlider.value)
         
         self.updateCustomization()
     }
+    
+    //selecting blue value
     
     @IBAction func blueColor(_ sender: Any) {
         blue = CGFloat(blueSlider.value / 255)
@@ -113,10 +115,14 @@ class SettingsViewController: UIViewController {
         self.updateSlidersAndLabels()
     }
     
+    //closing settings window
+    
     @IBAction func done(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         self.delegate?.settingsViewControllerFinished(self)
     }
+    
+    //updating preview customazation to reflect values selected
     
     func updateCustomization() {
         UIGraphicsBeginImageContext(pointImage.frame.size)
@@ -130,6 +136,8 @@ class SettingsViewController: UIViewController {
         pointImage.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
     }
+    
+    //updating sliders and labels
     
     func updateSlidersAndLabels() {
         pointSlider.value = Float(pointWidth)

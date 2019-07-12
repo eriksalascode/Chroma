@@ -63,7 +63,8 @@ class ViewController: UIViewController {
         updateCustomization()
     }
     
-   
+   //Selecting the color of the pen
+    
     @IBAction func blue(_ sender: Any) {
         (red, green, blue) = (0, 0, 255)
         updateCustomization()
@@ -110,12 +111,15 @@ class ViewController: UIViewController {
         updateCustomization()
     }
     
+    //using the eraser
     
     @IBAction func erase(_ sender: Any) {
         (red, green, blue) = (255, 255, 255)
         print("erasing?")
         updateCustomization()
     }
+    
+    //selecting the submenu
     
     @IBAction func pointChoice(_ sender: UIButton) {
         if sender == point {
@@ -147,6 +151,8 @@ class ViewController: UIViewController {
         }
     }
     
+    //saving the image
+    
     @IBAction func save(_ sender: Any) {
         UIGraphicsBeginImageContext(mainImage.bounds.size)
         mainImage.image?.draw(in: CGRect(x: 0, y: 0, width: mainImage.frame.size.width, height: mainImage.frame.size.height))
@@ -166,6 +172,8 @@ class ViewController: UIViewController {
 
     }
     
+    //reseting the image
+    
     @IBAction func reset(_ sender: Any) {
         let alert = UIAlertController(title: "Recycle Masterpiece", message: "Do you want to recylce your masterpiece?", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
@@ -178,6 +186,9 @@ class ViewController: UIViewController {
         alert.addAction(recycle)
         present(alert, animated: true, completion: nil)
     }
+    
+    
+    //hiding all buttons/menus
     
     @IBAction func hud(_ sender: Any) {
         hideAll = !hideAll
@@ -204,11 +215,16 @@ class ViewController: UIViewController {
         }
     }
     
+    //detecting when user begins to draw
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         swiped = false
         guard let touch = touches.first else { return }
         lastPoint = touch.location(in: self.view)
     }
+    
+    
+    //detecting when user draws
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         swiped = true
@@ -229,6 +245,8 @@ class ViewController: UIViewController {
         
         lastPoint = currentPoint
     }
+    
+    //detecting when user ends drawing
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         //if the user lifted their finger off the screen, stop drawing the line
@@ -252,6 +270,7 @@ class ViewController: UIViewController {
     }
     
     //drawing line without opacity
+    
     func drawLine(fromPoint: CGPoint, toPoint: CGPoint) {
         UIGraphicsBeginImageContext(self.view.frame.size)
         guard let context = UIGraphicsGetCurrentContext() else { return }
@@ -269,6 +288,7 @@ class ViewController: UIViewController {
     }
     
     //drawing line with opacity
+    
     func drawLineWithOpacity(from fromPoint: CGPoint, to toPoint: CGPoint, image: UIImageView, pointWidth: CGFloat, red: CGFloat, green: CGFloat, blue: CGFloat, opacity: CGFloat, imageOpacity: CGFloat) {
         UIGraphicsBeginImageContext(self.view.frame.size)
         guard let context = UIGraphicsGetCurrentContext() else {return}
@@ -284,6 +304,7 @@ class ViewController: UIViewController {
         image.alpha = imageOpacity
         UIGraphicsEndImageContext()
     }
+    // displaying the final line drawn
     
     func imageWhenTouchesEnded(withOpacity: CGFloat) {
         UIGraphicsBeginImageContext(tempImage.frame.size)
@@ -295,27 +316,22 @@ class ViewController: UIViewController {
     }
     
     // update view
+    
     func updateCustomization() {
         UIGraphicsBeginImageContext(pointImage.frame.size)
         guard let context = UIGraphicsGetCurrentContext() else {return}
         context.setLineCap(.round)
         context.setLineWidth(pointWidth)
-//        if (red, green, blue) == (255, 255, 255) && canvasColor == UIColor.white {
-//            context.setStrokeColor(red: red / 255, green: green / 255, blue: blue / 255, alpha: 1)
-//        } else if (red, green, blue) == (0, 0, 0) && canvasColor == UIColor.black {
-//            context.setStrokeColor(red: red / 255, green: green / 255, blue: blue / 255, alpha: 1)
-//        } else {
-//            context.setStrokeColor(red: red / 255, green: green / 255, blue: blue / 255, alpha: opacity)
-//        }
-        context.setStrokeColor(red: red / 255, green: green / 255, blue: blue / 255, alpha: opacity)
-
-        
+        if (red, green, blue) == (255, 255, 255) {
+            context.setStrokeColor(red: red / 255, green: green / 255, blue: blue / 255, alpha: 1)
+        } else {
+            context.setStrokeColor(red: red / 255, green: green / 255, blue: blue / 255, alpha: opacity)
+        }
         context.move(to: CGPoint(x: pointImage.frame.width / 2, y: pointImage.frame.height / 2))
         context.addLine(to: CGPoint(x: pointImage.frame.width / 2, y: pointImage.frame.height / 2))
         context.strokePath()
         pointImage.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-
         
         pointSlider.value = Float(pointWidth)
         pointCount.text = String(format: "%.0f", pointWidth)
@@ -325,7 +341,6 @@ class ViewController: UIViewController {
         menuBackground.layer.cornerRadius = 10
         pointSliderBackground.layer.cornerRadius = 10
         suppliesMenuBackground.layer.cornerRadius = 10
-        
         bluePoint.layer.cornerRadius = 10
         bluePoint.layer.borderColor = UIColor.clear.cgColor
         bluePoint.layer.borderWidth = 2
@@ -355,6 +370,8 @@ class ViewController: UIViewController {
         erasePoint.layer.borderWidth = 2
     }
     
+    //preparing to segue
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! SettingsViewController
         destinationVC.delegate = self
@@ -366,6 +383,8 @@ class ViewController: UIViewController {
         destinationVC.imageOpacity = imageOpacity
     }
 }
+
+//extending ViewController functionality
 
 extension ViewController: SettingsViewControllerDelegate {
     func settingsViewControllerFinished(_ settingsViewController: SettingsViewController) {
