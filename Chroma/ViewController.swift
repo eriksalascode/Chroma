@@ -46,7 +46,7 @@ class ViewController: UIViewController {
     var red: CGFloat = 0.0
     var green: CGFloat = 0.0
     var blue: CGFloat = 0.0
-    var pointWidth: CGFloat = 17.0
+    var pointWidth: CGFloat = 10.0
     var opacity: CGFloat = 1.0
     var imageOpacity: CGFloat = 1.0
     var hideAll = false
