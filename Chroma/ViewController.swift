@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var pointImageBackground: UIImageView!
     @IBOutlet weak var pointImage: UIImageView!
-
+    
     @IBOutlet weak var pointSlider: UISlider!
     @IBOutlet weak var pointCount: UILabel!
     
@@ -42,7 +42,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var erasePoint: UIButton!
     
     var swiped = false
-    var lastPoint = CGPoint.zero
     var red: CGFloat = 0.0
     var green: CGFloat = 0.0
     var blue: CGFloat = 0.0
@@ -52,6 +51,19 @@ class ViewController: UIViewController {
     var hideAll = false
     var hideSlider = true
     var hideSupplies = true
+    
+    var linesArray : [[CGPoint]] = [[CGPoint]]()//[[CGPoint(x: 1.1, y: 1.2), CGPoint(x: 1.1, y: 1.2), CGPoint(x: 1.1, y: 1.2)]]
+    var indexed = 0
+    var lastX : CGFloat = 0.0
+    var lastY  : CGFloat = 0.0
+    var currentX  : CGFloat = 0.0
+    var currentY  : CGFloat = 0.0
+    
+    var lastPoint = CGPoint.zero
+    var currentPoint = CGPoint.zero
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +75,7 @@ class ViewController: UIViewController {
         updateCustomization()
     }
     
-   //Selecting the color of the pen
+    //Selecting the color of the pen
     
     @IBAction func blue(_ sender: Any) {
         (red, green, blue) = (0, 0, 255)
@@ -119,6 +131,16 @@ class ViewController: UIViewController {
         updateCustomization()
     }
     
+    @IBAction func undo(_ sender: Any) {
+        _ = linesArray.popLast()
+        if indexed != 0 {
+            indexed -= 1
+        }
+        //        tempImage.setNeedsDisplay(CGRect(x: 0, y: 0, width: mainImage.frame.size.width, height: mainImage.frame.size.height))
+        //        mainImage.setNeedsDisplay(view.frame.size))
+    }
+    
+    
     //selecting the submenu
     
     @IBAction func pointChoice(_ sender: UIButton) {
@@ -169,7 +191,7 @@ class ViewController: UIViewController {
         }
         
         present(activity, animated: true, completion: nil)
-
+        
     }
     
     //reseting the image
@@ -181,7 +203,7 @@ class ViewController: UIViewController {
         let recycle = UIAlertAction(title: "Recycle", style: .default) { _ in
             self.mainImage.image = nil
         }
-    
+        
         alert.addAction(cancel)
         alert.addAction(recycle)
         present(alert, animated: true, completion: nil)
@@ -219,8 +241,15 @@ class ViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         swiped = false
-        guard let touch = touches.first else { return }
-        lastPoint = touch.location(in: self.view)
+        guard let touch = touches.first?.location(in: nil) else { return }
+        //        lastPoint = touch.location(in: self.view)
+        
+        linesArray.append([CGPoint]())
+        
+        guard var lastLine = linesArray.popLast() else {return}
+        lastLine.append(touch)
+        linesArray.append(lastLine)
+        print("line started")
     }
     
     
@@ -228,8 +257,38 @@ class ViewController: UIViewController {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         swiped = true
-        guard let touch = touches.first as UITouch? else { return }
-        let currentPoint = touch.location(in: view)
+        guard let touch = touches.first?.location(in: nil) else { return }
+        //        let currentPoint = touch.location(in: view)
+        for (indexed, points) in linesArray.enumerated() {
+            for (index, point) in points.enumerated() {
+                lastX = point.x
+                lastY = point.y
+            }
+            //You now have just the y coordinate of each point in the array.
+            
+            //            print(point.y) //Prints y coordinate of each point.
+        }
+        
+        guard var lastLine = linesArray.popLast() else {return}
+        lastLine.append(touch)
+        linesArray.append(lastLine)
+        
+        for (indexed, points) in linesArray.enumerated() {
+            for (index, point) in points.enumerated() {
+                currentX = point.x
+                currentY = point.y
+            }
+            //You now have just the y coordinate of each point in the array.
+            
+            //            print(point.y) //Prints y coordinate of each point.
+        }
+        
+        lastPoint = CGPoint(x: lastX, y: lastY)
+        currentPoint = CGPoint(x: currentX, y: currentY)
+        
+        
+        
+        
         
         // if the user is using opacity
         if opacity != 1 {
@@ -238,12 +297,15 @@ class ViewController: UIViewController {
             if (red, green, blue) == (255, 255, 255) {
                 drawLineWithOpacity(from: lastPoint, to: currentPoint, image: tempImage, pointWidth: pointWidth, red: red, green: green, blue: blue, opacity: 1, imageOpacity: 1)
             }
-        // if the user is not using opacity
+            // if the user is not using opacity
         } else {
             drawLine(fromPoint: lastPoint, toPoint: currentPoint)
         }
         
         lastPoint = currentPoint
+        
+        print("line moving")
+        
     }
     
     //detecting when user ends drawing
@@ -256,17 +318,21 @@ class ViewController: UIViewController {
             } else {
                 drawLine(fromPoint: lastPoint, toPoint: lastPoint)
             }
+            
+            indexed += 1
         }
         // if using the eraser
         if opacity != 1 && (red, green, blue) == (255, 255, 255) {
             imageWhenTouchesEnded(withOpacity: 1.0)
-        // if using opacity
+            // if using opacity
         } else if opacity != 1 {
             imageWhenTouchesEnded(withOpacity: imageOpacity)
-        // if not using opacity
+            // if not using opacity
         } else {
             imageWhenTouchesEnded(withOpacity: opacity)
         }
+        
+        print("line ended")
     }
     
     //drawing line without opacity
@@ -335,7 +401,7 @@ class ViewController: UIViewController {
         
         pointSlider.value = Float(pointWidth)
         pointCount.text = String(format: "%.0f", pointWidth)
-
+        
         hud.layer.cornerRadius = 20
         reset.layer.cornerRadius = 20
         menuBackground.layer.cornerRadius = 10
