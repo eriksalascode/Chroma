@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var mainImage: UIImageView!
     @IBOutlet weak var tempImage: UIImageView!
+    @IBOutlet weak var drawView: Canvas!
     @IBOutlet weak var hud: UIButton!
     @IBOutlet weak var reset: UIButton!
     @IBOutlet weak var save: UIButton!
@@ -45,7 +46,7 @@ class ViewController: UIViewController {
     var red: CGFloat = 0.0
     var green: CGFloat = 0.0
     var blue: CGFloat = 0.0
-    var pointWidth: CGFloat = 10.0
+    var pointWidth: CGFloat = 20.0
     var opacity: CGFloat = 1.0
     var imageOpacity: CGFloat = 1.0
     var hideAll = false
@@ -73,6 +74,9 @@ class ViewController: UIViewController {
         suppliesMenuBackground.isHidden = true
         suppliesMenuStack.isHidden = true
         updateCustomization()
+        
+        
+        
     }
     
     //Selecting the color of the pen
@@ -132,12 +136,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func undo(_ sender: Any) {
-        _ = linesArray.popLast()
-        if indexed != 0 {
-            indexed -= 1
-        }
-        //        tempImage.setNeedsDisplay(CGRect(x: 0, y: 0, width: mainImage.frame.size.width, height: mainImage.frame.size.height))
-        //        mainImage.setNeedsDisplay(view.frame.size))
+
+       drawView.undoFromCanvas()
+        
+        
+        //        _ = linesArray.popLast()
+//        if indexed != 0 {
+//            indexed -= 1
+//        }
+//        //        tempImage.setNeedsDisplay(CGRect(x: 0, y: 0, width: mainImage.frame.size.width, height: mainImage.frame.size.height))
+//        //        mainImage.setNeedsDisplay(view.frame.size))
     }
     
     
@@ -237,121 +245,134 @@ class ViewController: UIViewController {
         }
     }
     
-    //detecting when user begins to draw
+//    //detecting when user begins to draw
+//    
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        swiped = false
+//        guard let touch = touches.first?.location(in: nil) else { return }
+//        //        lastPoint = touch.location(in: self.view)
+//        
+//        linesArray.append([CGPoint]())
+//        
+//        guard var lastLine = linesArray.popLast() else {return}
+//        lastLine.append(touch)
+//        linesArray.append(lastLine)
+//        print("line started")
+//    }
+//    
+//    
+//    //detecting when user draws
+//    
+//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        swiped = true
+//        guard let touch = touches.first?.location(in: nil) else { return }
+//        //        let currentPoint = touch.location(in: view)
+//        for (indexed, points) in linesArray.enumerated() {
+//            for (index, point) in points.enumerated() {
+//                lastX = point.x
+//                lastY = point.y
+//            }
+//            //You now have just the y coordinate of each point in the array.
+//            
+//            //            print(point.y) //Prints y coordinate of each point.
+//        }
+//        
+//        guard var lastLine = linesArray.popLast() else {return}
+//        lastLine.append(touch)
+//        linesArray.append(lastLine)
+//        
+//        for (indexed, points) in linesArray.enumerated() {
+//            for (index, point) in points.enumerated() {
+//                currentX = point.x
+//                currentY = point.y
+//            }
+//            //You now have just the y coordinate of each point in the array.
+//            
+//            //            print(point.y) //Prints y coordinate of each point.
+//        }
+//        
+//        lastPoint = CGPoint(x: lastX, y: lastY)
+//        currentPoint = CGPoint(x: currentX, y: currentY)
+//        
+//        
+//        
+//        
+//        
+//        // if the user is using opacity
+//        if opacity != 1 {
+//            drawLineWithOpacity(from: lastPoint, to: currentPoint, image: tempImage, pointWidth: pointWidth, red: red, green: green, blue: blue, opacity: 1, imageOpacity: imageOpacity)
+//            // if the user is using the eraser, draw the eraser with no opacity
+//            if (red, green, blue) == (255, 255, 255) {
+//                drawLineWithOpacity(from: lastPoint, to: currentPoint, image: tempImage, pointWidth: pointWidth, red: red, green: green, blue: blue, opacity: 1, imageOpacity: 1)
+//            }
+//            // if the user is not using opacity
+//        } else {
+//            drawLine(fromPoint: lastPoint, toPoint: currentPoint)
+//        }
+//        
+//        lastPoint = currentPoint
+//        
+//        print("line moving")
+//        drawView.setNeedsDisplay()
+//
+//        
+//    }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        swiped = false
-        guard let touch = touches.first?.location(in: nil) else { return }
-        //        lastPoint = touch.location(in: self.view)
-        
-        linesArray.append([CGPoint]())
-        
-        guard var lastLine = linesArray.popLast() else {return}
-        lastLine.append(touch)
-        linesArray.append(lastLine)
-        print("line started")
-    }
-    
-    
-    //detecting when user draws
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        swiped = true
-        guard let touch = touches.first?.location(in: nil) else { return }
-        //        let currentPoint = touch.location(in: view)
-        for (indexed, points) in linesArray.enumerated() {
-            for (index, point) in points.enumerated() {
-                lastX = point.x
-                lastY = point.y
-            }
-            //You now have just the y coordinate of each point in the array.
-            
-            //            print(point.y) //Prints y coordinate of each point.
-        }
-        
-        guard var lastLine = linesArray.popLast() else {return}
-        lastLine.append(touch)
-        linesArray.append(lastLine)
-        
-        for (indexed, points) in linesArray.enumerated() {
-            for (index, point) in points.enumerated() {
-                currentX = point.x
-                currentY = point.y
-            }
-            //You now have just the y coordinate of each point in the array.
-            
-            //            print(point.y) //Prints y coordinate of each point.
-        }
-        
-        lastPoint = CGPoint(x: lastX, y: lastY)
-        currentPoint = CGPoint(x: currentX, y: currentY)
-        
-        
-        
-        
-        
-        // if the user is using opacity
-        if opacity != 1 {
-            drawLineWithOpacity(from: lastPoint, to: currentPoint, image: tempImage, pointWidth: pointWidth, red: red, green: green, blue: blue, opacity: 1, imageOpacity: imageOpacity)
-            // if the user is using the eraser, draw the eraser with no opacity
-            if (red, green, blue) == (255, 255, 255) {
-                drawLineWithOpacity(from: lastPoint, to: currentPoint, image: tempImage, pointWidth: pointWidth, red: red, green: green, blue: blue, opacity: 1, imageOpacity: 1)
-            }
-            // if the user is not using opacity
-        } else {
-            drawLine(fromPoint: lastPoint, toPoint: currentPoint)
-        }
-        
-        lastPoint = currentPoint
-        
-        print("line moving")
-        
-    }
-    
-    //detecting when user ends drawing
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //if the user lifted their finger off the screen, stop drawing the line
-        if !swiped {
-            if opacity != 1 {
-                drawLineWithOpacity(from: lastPoint, to: lastPoint, image: tempImage, pointWidth: pointWidth, red: red, green: green, blue: blue, opacity: 1, imageOpacity: imageOpacity)
-            } else {
-                drawLine(fromPoint: lastPoint, toPoint: lastPoint)
-            }
-            
-            indexed += 1
-        }
-        // if using the eraser
-        if opacity != 1 && (red, green, blue) == (255, 255, 255) {
-            imageWhenTouchesEnded(withOpacity: 1.0)
-            // if using opacity
-        } else if opacity != 1 {
-            imageWhenTouchesEnded(withOpacity: imageOpacity)
-            // if not using opacity
-        } else {
-            imageWhenTouchesEnded(withOpacity: opacity)
-        }
-        
-        print("line ended")
-    }
+//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        drawView.drawLines(fromPoint: lastPoint, toPoint: currentPoint, pointWidth: pointWidth, red: red, green: green, blue: blue, opacity: opacity, lines: linesArray)
+//    }
+//
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        drawView.drawLines(fromPoint: lastPoint, toPoint: currentPoint, pointWidth: pointWidth, red: red, green: green, blue: blue, opacity: opacity, lines: linesArray)
+//    }
+////
+//    //detecting when user ends drawing
+//    
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        //if the user lifted their finger off the screen, stop drawing the line
+//        if !swiped {
+//            if opacity != 1 {
+//                drawLineWithOpacity(from: lastPoint, to: lastPoint, image: tempImage, pointWidth: pointWidth, red: red, green: green, blue: blue, opacity: 1, imageOpacity: imageOpacity)
+//            } else {
+//                drawLine(fromPoint: lastPoint, toPoint: lastPoint)
+//            }
+//            
+//            indexed += 1
+//        }
+//        // if using the eraser
+//        if opacity != 1 && (red, green, blue) == (255, 255, 255) {
+//            imageWhenTouchesEnded(withOpacity: 1.0)
+//            // if using opacity
+//        } else if opacity != 1 {
+//            imageWhenTouchesEnded(withOpacity: imageOpacity)
+//            // if not using opacity
+//        } else {
+//            imageWhenTouchesEnded(withOpacity: opacity)
+//        }
+//        
+//        print("line ended")
+//        drawView.setNeedsDisplay()
+//
+//    }
     
     //drawing line without opacity
     
-    func drawLine(fromPoint: CGPoint, toPoint: CGPoint) {
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        guard let context = UIGraphicsGetCurrentContext() else { return }
-        tempImage.image?.draw(in: self.view.bounds)
-        context.move(to: fromPoint)
-        context.addLine(to: toPoint)
-        context.setLineCap(CGLineCap.round)
-        context.setLineWidth(pointWidth)
-        context.setStrokeColor(red: red / 255, green: green / 255, blue: blue / 255, alpha: opacity)
-        context.setBlendMode(CGBlendMode.normal)
-        context.strokePath()
-        tempImage.image = UIGraphicsGetImageFromCurrentImageContext()
-        tempImage.alpha = opacity
-        UIGraphicsEndImageContext()
-    }
+//    func drawLine(fromPoint: CGPoint, toPoint: CGPoint) {
+//        drawView.drawLines(fromPoint: lastPoint, toPoint: currentPoint, pointWidth: pointWidth, red: red, green: green, blue: blue, opacity: opacity, lines: linesArray)
+////        UIGraphicsBeginImageContext(self.view.frame.size)
+////        guard let context = UIGraphicsGetCurrentContext() else { return }
+////        tempImage.image?.draw(in: self.view.bounds)
+////        context.move(to: fromPoint)
+////        context.addLine(to: toPoint)
+////        context.setLineCap(CGLineCap.round)
+////        context.setLineWidth(pointWidth)
+////        context.setStrokeColor(red: red / 255, green: green / 255, blue: blue / 255, alpha: opacity)
+////        context.setBlendMode(CGBlendMode.normal)
+////        context.strokePath()
+////        tempImage.image = UIGraphicsGetImageFromCurrentImageContext()
+////        tempImage.alpha = opacity
+////        UIGraphicsEndImageContext()
+//    }
     
     //drawing line with opacity
     
