@@ -19,10 +19,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var point: UIButton!
     @IBOutlet weak var size: UIButton!
     
+    @IBOutlet weak var pointSliderBackgroundStack: UIStackView!
     @IBOutlet weak var pointSliderBackground: UIView!
     @IBOutlet weak var suppliesMenuBackground: UIView!
+    @IBOutlet weak var menuBackgroundStack: UIStackView!
     @IBOutlet weak var menuStack: UIStackView!
     @IBOutlet weak var pointSliderStack: UIStackView!
+    
+    @IBOutlet weak var suppliesMenuBackgroundStack: UIStackView!
     @IBOutlet weak var suppliesMenuStack: UIStackView!
     
     
@@ -69,10 +73,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        pointSliderBackground.isHidden = true
-        pointSliderStack.isHidden = true
-        suppliesMenuBackground.isHidden = true
-        suppliesMenuStack.isHidden = true
+//        pointSliderBackground.isHidden = true
+//        pointSliderStack.isHidden = true
+//        suppliesMenuBackground.isHidden = true
+//        suppliesMenuStack.isHidden = true
+        
+        view.bringSubviewToFront(drawView)
+        view.bringSubviewToFront(menuBackgroundStack)
+        view.bringSubviewToFront(menuStack)
+        view.bringSubviewToFront(pointImageBackground)
+        view.bringSubviewToFront(pointImage)
+        view.bringSubviewToFront(hud)
+        view.bringSubviewToFront(reset)
         updateCustomization()
         
         
@@ -155,28 +167,70 @@ class ViewController: UIViewController {
         if sender == point {
             hideSupplies = !hideSupplies
             if hideSupplies {
-                suppliesMenuBackground.isHidden = true
-                suppliesMenuStack.isHidden = true
+//                suppliesMenuBackground.isHidden = true
+//                suppliesMenuStack.isHidden = true
+                
+                //
+//                view.bringSubviewToFront(drawView)
+//                view.bringSubviewToFront(menuBackgroundStack)
+//                view.bringSubviewToFront(menuStack)
+                
+                view.bringSubviewToFront(drawView)
+                view.bringSubviewToFront(menuBackgroundStack)
+                view.bringSubviewToFront(menuStack)
+                view.bringSubviewToFront(pointImageBackground)
+                view.bringSubviewToFront(pointImage)
+                view.bringSubviewToFront(hud)
+                view.bringSubviewToFront(reset)
+                
             } else {
-                suppliesMenuBackground.isHidden = false
-                suppliesMenuStack.isHidden = false
-                pointSliderBackground.isHidden = true
-                pointSliderStack.isHidden = true
+//                suppliesMenuBackground.isHidden = false
+//                suppliesMenuStack.isHidden = false
+//                pointSliderBackground.isHidden = true
+//                pointSliderStack.isHidden = true
                 hideSlider = true
+                
+                //
+                view.bringSubviewToFront(suppliesMenuBackgroundStack)
+                view.bringSubviewToFront(suppliesMenuStack)
+                
+                view.sendSubviewToBack(pointSliderBackgroundStack)
+                view.sendSubviewToBack(pointSliderStack)
             }
         }
         if sender == size {
             hideSlider = !hideSlider
             if hideSlider {
-                pointSliderBackground.isHidden = true
-                pointSliderStack.isHidden = true
+//                pointSliderBackground.isHidden = true
+//                pointSliderStack.isHidden = true
+                
+                //
+//                view.bringSubviewToFront(drawView)
+//                view.bringSubviewToFront(menuBackgroundStack)
+//                view.bringSubviewToFront(menuStack)
+                
+                view.bringSubviewToFront(drawView)
+                view.bringSubviewToFront(menuBackgroundStack)
+                view.bringSubviewToFront(menuStack)
+                view.bringSubviewToFront(pointImageBackground)
+                view.bringSubviewToFront(pointImage)
+                view.bringSubviewToFront(hud)
+                view.bringSubviewToFront(reset)
             } else {
-                pointSliderBackground.isHidden = false
-                pointSliderStack.isHidden = false
-                suppliesMenuBackground.isHidden = true
-                suppliesMenuStack.isHidden = true
+//                pointSliderBackground.isHidden = false
+//                pointSliderStack.isHidden = false
+//                suppliesMenuBackground.isHidden = true
+//                suppliesMenuStack.isHidden = true
                 hideSupplies = true
-                pointSliderStack.superview?.bringSubviewToFront(pointSliderStack)
+//                pointSliderStack.superview?.bringSubviewToFront(pointSliderStack)
+                
+                //
+                view.bringSubviewToFront(pointSliderBackgroundStack)
+                view.bringSubviewToFront(pointSliderStack)
+                
+                view.sendSubviewToBack(suppliesMenuBackgroundStack)
+                view.sendSubviewToBack(suppliesMenuStack)
+                
             }
         }
     }
@@ -224,24 +278,41 @@ class ViewController: UIViewController {
         hideAll = !hideAll
         if hideAll {
             hud.setImage(UIImage(named: "menu.png"), for: .normal)
-            reset.isHidden = true
-            menuBackground.isHidden = true
-            menuStack.isHidden = true
-            pointSliderBackground.isHidden = true
-            pointSliderStack.isHidden = true
-            suppliesMenuBackground.isHidden = true
-            suppliesMenuStack.isHidden = true
-            pointImageBackground.isHidden = true
-            pointImage.isHidden = true
+//            reset.isHidden = true
+//            menuBackground.isHidden = true
+//            menuStack.isHidden = true
+//            pointSliderBackground.isHidden = true
+//            pointSliderStack.isHidden = true
+//            suppliesMenuBackground.isHidden = true
+//            suppliesMenuStack.isHidden = true
+//            pointImageBackground.isHidden = true
+//            pointImage.isHidden = true
+            
+            view.sendSubviewToBack(reset)
+            view.sendSubviewToBack(menuStack)
+            view.sendSubviewToBack(menuBackgroundStack)
+            view.sendSubviewToBack(pointSliderStack)
+            view.sendSubviewToBack(pointSliderBackgroundStack)
+            view.sendSubviewToBack(suppliesMenuStack)
+            view.sendSubviewToBack(suppliesMenuBackgroundStack)
+            view.sendSubviewToBack(pointImage)
+            view.sendSubviewToBack(pointImageBackground)
+            
             hideSupplies = true
             hideSlider = true
         } else {
             hud.setImage(UIImage(named: "close.png"), for: .normal)
-            reset.isHidden = false
-            menuBackground.isHidden = false
-            menuStack.isHidden = false
-            pointImageBackground.isHidden = false
-            pointImage.isHidden = false
+//            reset.isHidden = false
+//            menuBackground.isHidden = false
+//            menuStack.isHidden = false
+//            pointImageBackground.isHidden = false
+//            pointImage.isHidden = false
+            
+            view.bringSubviewToFront(reset)
+            view.bringSubviewToFront(menuBackgroundStack)
+            view.bringSubviewToFront(menuStack)
+            view.bringSubviewToFront(pointImageBackground)
+            view.bringSubviewToFront(pointImage)
         }
     }
     
