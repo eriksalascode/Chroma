@@ -11,8 +11,8 @@ import UIKit
 
 class Canvas: UIView {
     
-    var path: UIBezierPath!
-    var dot: UIBezierPath!
+//    var path: UIBezierPath!
+//    var dot: UIBezierPath!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -72,7 +72,7 @@ class Canvas: UIView {
         context.addLine(to: canvasCurrentPoint)
         context.setLineCap(CGLineCap.round)
         context.setLineWidth(canvasPointWidth)
-        context.setStrokeColor(red: canvasRed / 255, green: canvasGreen / 255, blue: canvasBlue / 255, alpha: 0.07)
+//        context.setStrokeColor(red: canvasRed / 255, green: canvasGreen / 255, blue: canvasBlue / 255, alpha: 0.07)
         context.setBlendMode(CGBlendMode.normal)
         context.strokePath()
         
@@ -81,44 +81,61 @@ class Canvas: UIView {
         setNeedsDisplay()
         
         print("drawing from class")
+        var path = [Path]()
         
-        path = UIBezierPath()
-        dot = UIBezierPath()
+//        path.bezPath = UIBezierPath()
+//        dot = UIBezierPath()
+//
+//        dot.lineWidth = 20.0
+//        path.flatness = 0
+//        path.lineCapStyle = .round
+//        path.miterLimit = 0
         
-        dot.lineWidth = 20.0
-        path.flatness = 0
-        path.lineCapStyle = .round
-        path.miterLimit = 0
-        
-        path.lineWidth = 20.0
-        path.flatness = 0
-        path.lineCapStyle = .round
-        path.miterLimit = 0
+
         
         canvasLinesArray.forEach { (line) in
+            var newPath = Path(bezPath: UIBezierPath(), color: UIColor.purple, lineWidth: 10.0)
+            
+            if path.count > 10 {
+                newPath.color = UIColor.orange
+                newPath.color.setStroke()
+            }
+           
+            
+            newPath.bezPath.lineWidth = 20.0
+            newPath.bezPath.flatness = 0
+            newPath.bezPath.lineCapStyle = .round
+            newPath.bezPath.miterLimit = 0
+            
+            path.append(newPath)
+            
             for (last, c) in line.enumerated() {
                 
                 if last == 0 && line.count == 1 {
-                    dot.fill()
+                    newPath.bezPath.fill()
                     print("!!!!!!!!!!!!!!!!!!!!!!!!!!fill")
                 }
 
                 if last == 0 {
-                    path.move(to: c)
+                    newPath.bezPath.move(to: c)
                     print("move")
-                    path.addLine(to: c)
+                    newPath.bezPath.addLine(to: c)
                     print("add line")
                 }
 
                 if last == 0 {
-                    path.move(to: c)
+                    newPath.bezPath.move(to: c)
                 } else {
-                    path.addLine(to: c)
+                    newPath.bezPath.addLine(to: c)
                 }
                 print("drawing from class")
+
                 //print(i, p)
             }
             
+            
+            context.strokePath()
+            path.last?.bezPath.stroke(with: .normal, alpha: 0.2)
 //            for (last, c) in line.enumerated() {
 //                
 //                if last == 0 {
@@ -137,8 +154,7 @@ class Canvas: UIView {
 //            }
         }
 
-        context.strokePath()
-        path.stroke()
+
     }
     
 //    func drawLines(fromPoint: CGPoint, toPoint: CGPoint, pointWidth: CGFloat, red: CGFloat, green: CGFloat, blue: CGFloat, opacity: CGFloat, lines: [[CGPoint]]) {
@@ -265,7 +281,7 @@ class Canvas: UIView {
             
 //            drawLine(fromPoint: lastPoint, toPoint: lastPoint)
             
-            indexed += 1
+//            indexed += 1
         }
         // if using the eraser
 //        if opacity != 1 && (red, green, blue) == (255, 255, 255) {
@@ -278,7 +294,7 @@ class Canvas: UIView {
 //            imageWhenTouchesEnded(withOpacity: opacity)
 //        }
         
-        print("line ended")
+        print("line                                                             \(indexed)")
         setNeedsDisplay()
         
     }

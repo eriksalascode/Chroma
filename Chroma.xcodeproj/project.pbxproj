@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F24CE21522F3A245005CC515 /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24CE21422F3A245005CC515 /* Canvas.swift */; };
+		F25B245822FBA7E8000F418F /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25B245722FBA7E8000F418F /* Path.swift */; };
 		F264D60822C82A7C00E6A66A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F264D60722C82A7C00E6A66A /* AppDelegate.swift */; };
 		F264D60A22C82A7C00E6A66A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F264D60922C82A7C00E6A66A /* ViewController.swift */; };
 		F264D60D22C82A7C00E6A66A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F264D60B22C82A7C00E6A66A /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		F24CE21422F3A245005CC515 /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
+		F25B245722FBA7E8000F418F /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		F264D60422C82A7C00E6A66A /* Chroma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chroma.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F264D60722C82A7C00E6A66A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F264D60922C82A7C00E6A66A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				F264D61922C82B6D00E6A66A /* Millunium-BOLD.ttf */,
 				F264D61322C82A7C00E6A66A /* Info.plist */,
 				F24CE21422F3A245005CC515 /* Canvas.swift */,
+				F25B245722FBA7E8000F418F /* Path.swift */,
 			);
 			path = Chroma;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 				F264D60A22C82A7C00E6A66A /* ViewController.swift in Sources */,
 				F264D60822C82A7C00E6A66A /* AppDelegate.swift in Sources */,
 				F264D61C22C82B7800E6A66A /* SettingsViewController.swift in Sources */,
+				F25B245822FBA7E8000F418F /* Path.swift in Sources */,
 				F24CE21522F3A245005CC515 /* Canvas.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
